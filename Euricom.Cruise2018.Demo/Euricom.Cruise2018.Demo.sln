@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Client", "Client\Euricom.Cruise2018.Demo.Client.csproj", "{AA0ABEEE-333E-429A-9A2C-01AA2E1F83CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C9959519-E008-4005-88D1-B2215630B553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Services.Core", "Services\Core\Euricom.Cruise2018.Demo.Services.Core.csproj", "{5F2D703F-C46F-43E2-909A-52EFB1F33025}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.ApplicationEvents", "ApplicationEvents\Euricom.Cruise2018.Demo.ApplicationEvents.csproj", "{1E073BCF-2EA6-4486-980C-AABFE36A638B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Commands", "Commands\Euricom.Cruise2018.Demo.Commands.csproj", "{F37D754B-4D15-4246-8656-58FB7DEBA935}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Domain", "Domain\Euricom.Cruise2018.Demo.Domain.csproj", "{29DE93FC-8F58-45D1-A0C6-4C7ECA204721}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Projections", "Projections\Euricom.Cruise2018.Demo.Projections.csproj", "{A61F2454-8AF0-4D94-8192-6A9D6D13E8E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Query", "Query\Euricom.Cruise2018.Demo.Query.csproj", "{19599264-3FFB-4287-BFA0-27CB2001875C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Infrastructure", "Infrastructure\Euricom.Cruise2018.Demo.Infrastructure.csproj", "{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.SharedKernel", "SharedKernel\Euricom.Cruise2018.Demo.SharedKernel.csproj", "{94A74D66-EF03-42BC-AD85-64471E166C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euricom.Cruise2018.Demo.Services.Api", "Services\Api\Euricom.Cruise2018.Demo.Services.Api.csproj", "{C34130BB-A7FB-4E0D-968F-9D292EA7244B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA0ABEEE-333E-429A-9A2C-01AA2E1F83CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA0ABEEE-333E-429A-9A2C-01AA2E1F83CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA0ABEEE-333E-429A-9A2C-01AA2E1F83CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA0ABEEE-333E-429A-9A2C-01AA2E1F83CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2D703F-C46F-43E2-909A-52EFB1F33025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2D703F-C46F-43E2-909A-52EFB1F33025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2D703F-C46F-43E2-909A-52EFB1F33025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2D703F-C46F-43E2-909A-52EFB1F33025}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E073BCF-2EA6-4486-980C-AABFE36A638B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E073BCF-2EA6-4486-980C-AABFE36A638B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E073BCF-2EA6-4486-980C-AABFE36A638B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E073BCF-2EA6-4486-980C-AABFE36A638B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F37D754B-4D15-4246-8656-58FB7DEBA935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F37D754B-4D15-4246-8656-58FB7DEBA935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F37D754B-4D15-4246-8656-58FB7DEBA935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F37D754B-4D15-4246-8656-58FB7DEBA935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29DE93FC-8F58-45D1-A0C6-4C7ECA204721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DE93FC-8F58-45D1-A0C6-4C7ECA204721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DE93FC-8F58-45D1-A0C6-4C7ECA204721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DE93FC-8F58-45D1-A0C6-4C7ECA204721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A61F2454-8AF0-4D94-8192-6A9D6D13E8E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A61F2454-8AF0-4D94-8192-6A9D6D13E8E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A61F2454-8AF0-4D94-8192-6A9D6D13E8E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A61F2454-8AF0-4D94-8192-6A9D6D13E8E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19599264-3FFB-4287-BFA0-27CB2001875C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19599264-3FFB-4287-BFA0-27CB2001875C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19599264-3FFB-4287-BFA0-27CB2001875C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19599264-3FFB-4287-BFA0-27CB2001875C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A74D66-EF03-42BC-AD85-64471E166C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A74D66-EF03-42BC-AD85-64471E166C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A74D66-EF03-42BC-AD85-64471E166C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A74D66-EF03-42BC-AD85-64471E166C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34130BB-A7FB-4E0D-968F-9D292EA7244B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34130BB-A7FB-4E0D-968F-9D292EA7244B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34130BB-A7FB-4E0D-968F-9D292EA7244B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34130BB-A7FB-4E0D-968F-9D292EA7244B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F2D703F-C46F-43E2-909A-52EFB1F33025} = {C9959519-E008-4005-88D1-B2215630B553}
+		{C34130BB-A7FB-4E0D-968F-9D292EA7244B} = {C9959519-E008-4005-88D1-B2215630B553}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C3F89F7-1FBB-4B72-AFAE-2BBBCED4FBA1}
+	EndGlobalSection
+EndGlobal
