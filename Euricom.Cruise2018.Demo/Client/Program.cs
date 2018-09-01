@@ -78,7 +78,7 @@ namespace Euricom.Cruise2018.Demo.Client
             Task<ISendEndpoint> sendEndpointTask = _bus.GetSendEndpoint(new Uri(string.Concat(rabbitMqAddress, "/", rabbitMqQueue)));
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
-            Task sendZetPapierAan = sendEndpoint.Send<ZetPapierUit>(new ZetPapierUit(_pernummer));
+            Task sendZetPapierAan = sendEndpoint.Send<ZetPapierAan>(new ZetPapierAan(_pernummer));
         }
 
         private static void SendZetPapierUitCommand()
@@ -86,7 +86,7 @@ namespace Euricom.Cruise2018.Demo.Client
             Task<ISendEndpoint> sendEndpointTask = _bus.GetSendEndpoint(new Uri(string.Concat(rabbitMqAddress, "/", rabbitMqQueue)));
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
-            Task sendZetPapierAan = sendEndpoint.Send<ZetPapierAan>(new ZetPapierAan(_pernummer));
+            Task sendZetPapierAan = sendEndpoint.Send<ZetPapierUit>(new ZetPapierUit(_pernummer));
         }
         private static void ConfigureBus()
         {
