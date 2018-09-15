@@ -80,13 +80,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessEvents\Euricom.Cruise2018.Demo.BusinessEvents.csproj">
+      <Project>{E9008D69-87FC-49F1-BD10-8C6C40E58E93}</Project>
+      <Name>Euricom.Cruise2018.Demo.BusinessEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Commands\Euricom.Cruise2018.Demo.Commands.csproj">
       <Project>{F37D754B-4D15-4246-8656-58FB7DEBA935}</Project>
       <Name>Euricom.Cruise2018.Demo.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharedKernel\Euricom.Cruise2018.Demo.SharedKernel.csproj">
-      <Project>{94A74D66-EF03-42BC-AD85-64471E166C93}</Project>
-      <Name>Euricom.Cruise2018.Demo.SharedKernel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,9 +18,19 @@ namespace Euricom.Cruise2018.Demo.Projections
             system.GetAddressBook().Tell(new AddressBook.Register(ActorAddresses.ProjectionCoordinator, projectionCoordinator), ActorRefs.NoSender);
 
             // Projectors
-            var klantProjector = system.ActorOf(
-               system.DI().Props<PapierSettingPersoon.PapierSettingPersoonProjector>(), "papiersettingpersoonprojector");
+            Func<Query.QueryContext> queryContextFactory = Factory;
 
+            var papiersettingPersoonProjector = system.ActorOf(
+               Props.Create<PapierSettingPersoon.PapierSettingPersoonProjector>(
+                   projectionCoordinator,
+                   new PapierSettingPersoon.PapierSettingPersoonProjections(),
+                   queryContextFactory), "papiersettingpersoonprojector");
+
+        }
+
+        private Query.QueryContext Factory()
+        {
+            return new Query.QueryContext();
         }
     }
 

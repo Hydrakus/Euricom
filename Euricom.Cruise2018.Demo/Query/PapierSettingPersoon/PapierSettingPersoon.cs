@@ -36,6 +36,8 @@ namespace Euricom.Cruise2018.Demo.Query.PapierSettingPersoon
 
         public bool? PapierAan { get; set; }
 
+        public bool IsActief { get; set; }
+
         public Adres Adres { get; set; }
     }
 }

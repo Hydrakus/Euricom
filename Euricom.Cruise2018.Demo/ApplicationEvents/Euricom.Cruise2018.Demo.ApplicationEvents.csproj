@@ -43,16 +43,13 @@
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonPapierAangezet.cs" />
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonGeregistreerd.cs" />
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonPapierUitgezet.cs" />
+    <Compile Include="PapierSettingPersoon\PapierSettingPersoonUitgeschreven.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Euricom.Cruise2018.Demo.Infrastructure.csproj">
       <Project>{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}</Project>
       <Name>Euricom.Cruise2018.Demo.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharedKernel\Euricom.Cruise2018.Demo.SharedKernel.csproj">
-      <Project>{94A74D66-EF03-42BC-AD85-64471E166C93}</Project>
-      <Name>Euricom.Cruise2018.Demo.SharedKernel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

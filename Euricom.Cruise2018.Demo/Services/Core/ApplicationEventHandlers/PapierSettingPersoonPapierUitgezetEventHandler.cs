@@ -3,11 +3,11 @@ using Euricom.Cruise2018.Demo.ApplicationEvents.PapierSettingPersoon;
 using MassTransit;
 using System.Threading.Tasks;
 
-namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventConsumers
+namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventHandlers
 {
-    public class PapierSettingPersoonPapierUitgezetConsumer : ApplicationEventConsumer, IConsumer<PapierSettingPersoonPapierUitgezet>
+    public class PapierSettingPersoonPapierUitgezetHandler : ApplicationEventHandler, IConsumer<PapierSettingPersoonPapierUitgezet>
     {
-        public PapierSettingPersoonPapierUitgezetConsumer(ActorSystem actorSystem) : base(actorSystem)
+        public PapierSettingPersoonPapierUitgezetHandler(ActorSystem actorSystem) : base(actorSystem)
         {
 
         }

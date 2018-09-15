@@ -139,15 +139,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEventConsumers\ApplicationEventConsumer.cs" />
-    <Compile Include="ApplicationEventConsumers\PapierSettingPersoonConsumer.cs" />
-    <Compile Include="ApplicationEventConsumers\PapierSettingPersoonPapierUitgezetConsumer.cs" />
-    <Compile Include="ApplicationEventConsumers\PapierSettingPersoonPapierAangezetConsumer.cs" />
+    <Compile Include="ApplicationEventHandlers\ApplicationEventHandler.cs" />
+    <Compile Include="ApplicationEventHandlers\PapierSettingPersoonGeregistreerdEventHandler.cs" />
+    <Compile Include="ApplicationEventHandlers\PapierSettingPersoonUitgeschrevenEventHandler.cs" />
+    <Compile Include="ApplicationEventHandlers\PapierSettingPersoonPapierUitgezetEventHandler.cs" />
+    <Compile Include="ApplicationEventHandlers\PapierSettingPersoonPapierAangezetEventHandler.cs" />
     <Compile Include="BootStrapper.cs" />
-    <Compile Include="CommandConsumers\CommandConsumer.cs" />
-    <Compile Include="CommandConsumers\RegistreerPapierSettingPersoonConsumer.cs" />
-    <Compile Include="CommandConsumers\ZetPapierUitConsumer.cs" />
-    <Compile Include="CommandConsumers\ZetPapierAanConsumer.cs" />
+    <Compile Include="BusinessEventHandlers\BusinessEventHandler.cs" />
+    <Compile Include="BusinessEventHandlers\PersoonGeregistreerdEventHandler.cs" />
+    <Compile Include="BusinessEventHandlers\PersoonUitgeschrevenEventHandler.cs" />
+    <Compile Include="BusinessEventHandlers\PapierSettingGekozenEventHandler.cs" />
     <Compile Include="CoreService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -166,6 +167,10 @@
     <ProjectReference Include="..\..\ApplicationEvents\Euricom.Cruise2018.Demo.ApplicationEvents.csproj">
       <Project>{1E073BCF-2EA6-4486-980C-AABFE36A638B}</Project>
       <Name>Euricom.Cruise2018.Demo.ApplicationEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BusinessEvents\Euricom.Cruise2018.Demo.BusinessEvents.csproj">
+      <Project>{E9008D69-87FC-49F1-BD10-8C6C40E58E93}</Project>
+      <Name>Euricom.Cruise2018.Demo.BusinessEvents</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Commands\Euricom.Cruise2018.Demo.Commands.csproj">
       <Project>{F37D754B-4D15-4246-8656-58FB7DEBA935}</Project>

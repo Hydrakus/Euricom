@@ -72,6 +72,7 @@
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonAR.cs" />
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonCoordinator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueObjects\Adres.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -89,10 +90,6 @@
     <ProjectReference Include="..\Infrastructure\Euricom.Cruise2018.Demo.Infrastructure.csproj">
       <Project>{EEDEAFF6-7485-41D6-82AE-6995B882D7AF}</Project>
       <Name>Euricom.Cruise2018.Demo.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharedKernel\Euricom.Cruise2018.Demo.SharedKernel.csproj">
-      <Project>{94A74D66-EF03-42BC-AD85-64471E166C93}</Project>
-      <Name>Euricom.Cruise2018.Demo.SharedKernel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

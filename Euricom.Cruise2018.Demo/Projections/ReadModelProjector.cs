@@ -1,43 +1,44 @@
 ﻿using Akka.Actor;
 using Autofac;
-using Euricom.Cruise2018.Demo.Infrastructure.Akka;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Euricom.Cruise2018.Demo.Projections
 {
     public abstract class ReadModelProjector : ReceiveActor
     {
-        private readonly IActorRef _projectionCoordinator;
-        private readonly ILifetimeScope _lifetimeScope;
+        private readonly Dictionary<Type, MethodInfo> _projectMethods = new Dictionary<Type, MethodInfo>();
+        protected readonly IActorRef _projectionCoordinator;
 
-        private IReadModelProjectionLogic _rmProjLogic;
-
-        protected ReadModelProjector(ILifetimeScope lifetimeScope)
+        public ReadModelProjector(IActorRef projectionCoordinator)
         {
-            _projectionCoordinator = Context.System.GetActorFromAddressBook(ActorAddresses.ProjectionCoordinator);
-            _lifetimeScope = lifetimeScope;
-        }
+            _projectionCoordinator = projectionCoordinator;
 
-        protected override void PreStart()
-        {
-            _rmProjLogic = ReadModelProjectionLogicFactory(_lifetimeScope);
-
+            RegisterProjectMethods();
             RegisterWithCoordinator();
 
-            Become(ReadyToProject);
-        }
-
-        private void ReadyToProject()
-        {
             Receive<ProjectApplicationEvent>(m => ProjectAE(m));
         }
 
-        protected abstract IReadModelProjectionLogic ReadModelProjectionLogicFactory(ILifetimeScope lifetimeScope);
+        private void RegisterProjectMethods()
+        {
+            var projectTypes = this.GetType()
+                .GetInterfaces()
+                .Where(i => i.IsGenericType)
+                .Where(i => i.GetGenericTypeDefinition() == typeof(IProject<>));
+
+            foreach (var projectType in projectTypes)
+            {
+                var projectMethod = this.GetType().GetInterfaceMap(projectType).TargetMethods.First();
+                _projectMethods.Add(projectMethod.GetParameters().First().ParameterType, projectMethod);
+            }
+        }
 
         private void RegisterWithCoordinator()
         {
-            var aeTypes = _rmProjLogic.GetType()
+            var aeTypes = this.GetType()
                 .GetInterfaces()
                 .Where(i => i.IsGenericType)
                 .Where(i => i.GetGenericTypeDefinition() == typeof(IProject<>))
@@ -49,28 +50,24 @@ namespace Euricom.Cruise2018.Demo.Projections
 
         private void ProjectAE(ProjectApplicationEvent message)
         {
-            _rmProjLogic.Project(message.Event);
+            try
+            {
+                _projectMethods[message.Event.GetType()].Invoke(this, new object[] { (object)message.Event });
 
-            Sender.Tell(new ProjectionSucceeded(message.CorrelationId));
+                Sender.Tell(new ProjectionSucceeded(message.CorrelationId));
+            }
+            catch (Exception ex)
+            {
+                Context.System.Log.Error(ex, "An exception occured while projecting an application event of type '{0}' for aggregate id '{1}'!",
+                    message.Event.GetType().ToString(), message.Event.AggregateId);
+
+                Sender.Tell(new ProjectionFailed(message.CorrelationId));
+            }
         }
 
-        protected override void PreRestart(Exception reason, object message)
+        protected virtual bool CheckEventVersion(long readModelVersion, long eventVersion)
         {
-            string errorMsg;
-            var @event = message as ProjectApplicationEvent;
-            if (@event != null)
-            {
-                errorMsg = string.Format("An unhandled exception occured while projecting an application event of type '{0}' for aggregate id '{1}'.",
-                    @event.Event.GetType().FullName, @event.Event.AggregateId);
-
-                Sender.Tell(new ProjectionFailed(@event.CorrelationId));
-            }
-            else
-            {
-                errorMsg = string.Format("An unhandled exception occured while projecting an application event. Message type '{0}'.",
-                    message.GetType().FullName);
-            }
-            Context.System.Log.Error(reason, errorMsg);
+            return eventVersion == readModelVersion + 1;
         }
     }
 }

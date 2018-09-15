@@ -1,10 +1,7 @@
-﻿using BM2.RecipientData.NAVOUT.SharedKernel.ValueObjects;
-using Euricom.Cruise2018.Demo.Commands.PapierSettingPersoon;
+﻿using Euricom.Cruise2018.Demo.BusinessEvents;
 using MassTransit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Euricom.Cruise2018.Demo.Client
@@ -14,7 +11,7 @@ namespace Euricom.Cruise2018.Demo.Client
         private static string _toolName = "Euricom.Cruise2018.Demo.Client";
         private static Dictionary<int, string> _menuDictionary;
         private static string rabbitMqAddress = "rabbitmq://localhost";
-        private static string rabbitMqQueue = "euricom.cruise2018.demo.commands";
+        private static string rabbitMqQueue = "euricom.cruise2018.demo.businessevents";
         private static string _pernummer;
         private static IBusControl _bus;
 
@@ -26,9 +23,10 @@ namespace Euricom.Cruise2018.Demo.Client
 
             _menuDictionary = new Dictionary<int, string>
             {
-                {1, "RegistreerPapierSettingPersoon"},
-                {2, "ZetPapierAan"},
-                {3, "ZetPapierUit"},
+                {1, "PersoonGeregistreerd"},
+                {2, "PapierSettingGekozen_PapierAan"},
+                {3, "PapierSettingGekozen_PapierUit"},
+                {4, "PersoonUitgeschreven" }
             };
 
             RunMenu(_menuDictionary);
@@ -44,13 +42,16 @@ namespace Euricom.Cruise2018.Demo.Client
             switch (menuChoice)
             {
                 case "1":
-                    SendRegistreerPapierSettingPersoonCommand();
+                    SendPersoonGeregistreerd();
                     break;
                 case "2":
-                    SendZetPapierAanCommand();
+                    SendPapierSettingGekozen(true);
                     break;
                 case "3":
-                    SendZetPapierUitCommand();
+                    SendPapierSettingGekozen(false);
+                    break;
+                case "4":
+                    SendPersoonUitgeschreven();
                     break;
                 case "exit":
                     Environment.Exit(0);
@@ -62,32 +63,48 @@ namespace Euricom.Cruise2018.Demo.Client
             RunMenu(_menuDictionary);  
         }
 
-        private static void SendRegistreerPapierSettingPersoonCommand()
+        private static void SendPersoonGeregistreerd()
         {
             Console.WriteLine("Geef een persoonnummer in:");
             _pernummer = Console.ReadLine();
             Task<ISendEndpoint> sendEndpointTask = _bus.GetSendEndpoint(new Uri(string.Concat(rabbitMqAddress, "/", rabbitMqQueue)));
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
-            Task sendRegistreerPapierSetting = sendEndpoint.Send<RegistreerPapierSettingPersoon>(new RegistreerPapierSettingPersoon(_pernummer, "Euricom", "Demo", 
-                new Adres("Schalïenhoevedreef","20","J","2800", "Mechelen")));
+            sendEndpoint.Send(new PersoonGeregistreerd()
+            {
+                PerNummer = _pernummer,
+                Naam = "Euricom",
+                Voornaam = "Demo",
+                Straat = "Schalïenhoevedreef",
+                Nummer = "20",
+                Bus = "J",
+                Postcode = "2800",
+                Gemeente = "Mechelen"
+            });
         }
 
-        private static void SendZetPapierAanCommand()
+        private static void SendPapierSettingGekozen(bool papierAan)
         {
             Task<ISendEndpoint> sendEndpointTask = _bus.GetSendEndpoint(new Uri(string.Concat(rabbitMqAddress, "/", rabbitMqQueue)));
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
-            Task sendZetPapierAan = sendEndpoint.Send<ZetPapierAan>(new ZetPapierAan(_pernummer));
+            sendEndpoint.Send(new PapiersettingGekozen
+            {
+                PerNummer = _pernummer,
+                PapierAan = papierAan
+            });
         }
 
-        private static void SendZetPapierUitCommand()
+        private static void SendPersoonUitgeschreven()
         {
             Task<ISendEndpoint> sendEndpointTask = _bus.GetSendEndpoint(new Uri(string.Concat(rabbitMqAddress, "/", rabbitMqQueue)));
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
-            Task sendZetPapierAan = sendEndpoint.Send<ZetPapierUit>(new ZetPapierUit(_pernummer));
+            sendEndpoint.Send(new PersoonUitgeschreven {
+                PerNummer = _pernummer
+            });
         }
+
         private static void ConfigureBus()
         {
             Uri rabbitMqRootUri = new Uri(rabbitMqAddress);

@@ -5,13 +5,13 @@ using Akka.Actor;
 using Euricom.Cruise2018.Demo.Infrastructure.Akka;
 using Euricom.Cruise2018.Demo.Infrastructure.Commands;
 
-namespace Euricom.Cruise2018.Demo.Services.Core.CommandConsumers
+namespace Euricom.Cruise2018.Demo.Services.Core.BusinessEventHandlers
 {
-    public abstract class CommandConsumer
+    public abstract class BusinessEventHandler
     {
         private readonly ActorSystem _actorSystem;
 
-        protected CommandConsumer(ActorSystem actorSystem)
+        protected BusinessEventHandler(ActorSystem actorSystem)
         {
             _actorSystem = actorSystem;
         }

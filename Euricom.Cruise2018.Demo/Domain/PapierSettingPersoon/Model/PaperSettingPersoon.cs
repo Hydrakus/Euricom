@@ -1,10 +1,5 @@
-﻿using BM2.RecipientData.NAVOUT.SharedKernel.ValueObjects;
-using Euricom.Cruise2018.Demo.ApplicationEvents.PapierSettingPersoon;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Euricom.Cruise2018.Demo.ApplicationEvents.PapierSettingPersoon;
+using Euricom.Cruise2018.Demo.Domain.ValueObjects;
 
 namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon.Model
 {
@@ -15,6 +10,7 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon.Model
         public string Voornaam { get; private set; }
         public bool? PapierAan { get; set; }
         public Adres Adres { get; private set; }
+        public bool IsActief { get; private set; }
 
         public PaperSettingPersoon(string id) : base(id)
         {
@@ -30,7 +26,8 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon.Model
             PerNummer = @event.PerNummer;
             Naam = @event.Naam;
             Voornaam = @event.Voornaam;
-            Adres = @event.Adres;
+            Adres = new Adres(@event.Straat, @event.Nummer, @event.Bus, @event.Postcode, @event.Gemeente);
+            IsActief = true;
         }
 
         private void Apply(PapierSettingPersoonPapierAangezet @event)
@@ -43,6 +40,12 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon.Model
         {
             PerNummer = @event.PerNummer;
             PapierAan = false;
+        }
+
+        private void Apply(PapierSettingPersoonUitgeschreven @event)
+        {
+            PerNummer = @event.PerNummer;
+            IsActief = false;
         }
     }
 }

@@ -64,8 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProject.cs" />
-    <Compile Include="IReadModelProjectionHandler.cs" />
-    <Compile Include="PapierSettingPersoon\PapierSettingPersoonProjectionLogic.cs" />
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonProjections.cs" />
     <Compile Include="PapierSettingPersoon\PapierSettingPersoonProjector.cs" />
     <Compile Include="ProjectApplicationEvent.cs" />
@@ -76,8 +74,6 @@
     <Compile Include="Projections.cs" />
     <Compile Include="ProjectionSucceeded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadModelProjectionHandler.cs" />
-    <Compile Include="ReadModelProjectionLogic.cs" />
     <Compile Include="ReadModelProjector.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,10 +88,6 @@
     <ProjectReference Include="..\Query\Euricom.Cruise2018.Demo.Query.csproj">
       <Project>{19599264-3FFB-4287-BFA0-27CB2001875C}</Project>
       <Name>Euricom.Cruise2018.Demo.Query</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharedKernel\Euricom.Cruise2018.Demo.SharedKernel.csproj">
-      <Project>{94A74D66-EF03-42BC-AD85-64471E166C93}</Project>
-      <Name>Euricom.Cruise2018.Demo.SharedKernel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

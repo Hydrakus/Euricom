@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventConsumers
+namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventHandlers
 {
-    public abstract class ApplicationEventConsumer
+    public abstract class ApplicationEventHandler
     {
         private readonly ActorSystem _actorSystem;
 
-        public ApplicationEventConsumer(ActorSystem actorSystem)
+        public ApplicationEventHandler(ActorSystem actorSystem)
         {
             _actorSystem = actorSystem;
         }

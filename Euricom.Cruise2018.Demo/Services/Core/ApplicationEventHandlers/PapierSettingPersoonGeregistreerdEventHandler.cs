@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventConsumers
+namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventHandlers
 {
-    public class PapierSettingPersoonConsumer : ApplicationEventConsumer, IConsumer<PapierSettingPersoonGeregistreerd>
+    public class PapierSettingPersoonGeregistreerdHandler : ApplicationEventHandler, IConsumer<PapierSettingPersoonGeregistreerd>
     {
-        public PapierSettingPersoonConsumer(ActorSystem actorSystem) : base(actorSystem)
+        public PapierSettingPersoonGeregistreerdHandler(ActorSystem actorSystem) : base(actorSystem)
         {
 
         }

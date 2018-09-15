@@ -2,8 +2,8 @@
 using System.Reflection;
 using Akka.Actor;
 using Autofac;
-using Euricom.Cruise2018.Demo.Services.Core.ApplicationEventConsumers;
-using Euricom.Cruise2018.Demo.Services.Core.CommandConsumers;
+using Euricom.Cruise2018.Demo.Services.Core.ApplicationEventHandlers;
+using Euricom.Cruise2018.Demo.Services.Core.BusinessEventHandlers;
 using MassTransit;
 using MassTransit.RabbitMqTransport;
 using IContainer = Autofac.IContainer;
@@ -61,18 +61,19 @@ namespace Euricom.Cruise2018.Demo.Services.Core
                         settings.Username("guest");
                     });
 
-                    rabbit.ReceiveEndpoint(rabbitMqHost, "euricom.cruise2018.demo.commands", conf =>
+                    rabbit.ReceiveEndpoint(rabbitMqHost, "euricom.cruise2018.demo.businessevents", conf =>
                     {
-                        conf.Consumer<RegistreerPapierSettingPersoonConsumer>(context);
-                        conf.Consumer<ZetPapierAanConsumer>(context);
-                        conf.Consumer<ZetPapierUitConsumer>(context);
+                        conf.Consumer<PapierSettingGekozenEventHandler>(context);
+                        conf.Consumer<PersoonGeregistreerdEventHandler>(context);
+                        conf.Consumer<PersoonUitgeschrevenEventHandler>(context);
                     });
 
                     rabbit.ReceiveEndpoint(rabbitMqHost, "euricom.cruise2018.demo.applicationevents", conf =>
                     {
-                        conf.Consumer<PapierSettingPersoonConsumer>(context);
-                        conf.Consumer<PapierSettingPersoonPapierAangezetConsumer>(context);
-                        conf.Consumer<PapierSettingPersoonPapierUitgezetConsumer>(context);
+                        conf.Consumer<PapierSettingPersoonGeregistreerdHandler>(context);
+                        conf.Consumer<PapierSettingPersoonPapierAangezetHandler>(context);
+                        conf.Consumer<PapierSettingPersoonPapierUitgezetHandler>(context);
+                        conf.Consumer<PapierSettingPersoonUitgeschrevenHandler>(context);
                     });
                 });
 
