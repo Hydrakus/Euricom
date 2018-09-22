@@ -26,7 +26,8 @@ namespace Euricom.Cruise2018.Demo.Client
                 {1, "PersoonGeregistreerd"},
                 {2, "PapierSettingGekozen_PapierAan"},
                 {3, "PapierSettingGekozen_PapierUit"},
-                {4, "PersoonUitgeschreven" }
+                {4, "PersoonUitgeschreven" },
+                {5, "Kies een Persoonnummer" }
             };
 
             RunMenu(_menuDictionary);
@@ -53,6 +54,9 @@ namespace Euricom.Cruise2018.Demo.Client
                 case "4":
                     SendPersoonUitgeschreven();
                     break;
+                case "5":
+                    KiesEenPerNummer();
+                    break;
                 case "exit":
                     Environment.Exit(0);
                     break;
@@ -65,8 +69,6 @@ namespace Euricom.Cruise2018.Demo.Client
 
         private static void SendPersoonGeregistreerd()
         {
-            Console.WriteLine("Geef een persoonnummer in:");
-            _pernummer = Console.ReadLine();
             Task<ISendEndpoint> sendEndpointTask = _bus.GetSendEndpoint(new Uri(string.Concat(rabbitMqAddress, "/", rabbitMqQueue)));
             ISendEndpoint sendEndpoint = sendEndpointTask.Result;
 
@@ -104,6 +106,12 @@ namespace Euricom.Cruise2018.Demo.Client
                 PerNummer = _pernummer
             });
         }
+
+        private static void KiesEenPerNummer()
+        {
+            Console.WriteLine("Geef een persoonnummer in:");
+            _pernummer = Console.ReadLine();
+        } 
 
         private static void ConfigureBus()
         {

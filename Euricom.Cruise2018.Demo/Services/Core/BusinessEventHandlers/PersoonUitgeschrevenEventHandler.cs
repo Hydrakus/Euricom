@@ -15,7 +15,6 @@ namespace Euricom.Cruise2018.Demo.Services.Core.BusinessEventHandlers
 
         public Task Consume(ConsumeContext<PersoonUitgeschreven> context)
         {
-            ExecuteCommand(ActorAddresses.PapierSettingPersoonCoordinator, new SchrijfPapierSettingPersoonUit(context.Message.PerNummer));
 
             return Task.FromResult(0);
         }

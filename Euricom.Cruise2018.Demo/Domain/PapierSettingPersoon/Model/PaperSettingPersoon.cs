@@ -42,6 +42,7 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon.Model
             PapierAan = false;
         }
 
+
         private void Apply(PapierSettingPersoonUitgeschreven @event)
         {
             PerNummer = @event.PerNummer;

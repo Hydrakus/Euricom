@@ -42,13 +42,5 @@ namespace Euricom.Cruise2018.Demo.Projections.PapierSettingPersoon
             rm.Version = @event.Version;
             rm.PapierSettingPersoonId = @event.AggregateId;
         }
-
-        public void Project(ref RM.PapierSettingPersoon rm, PapierSettingPersoonUitgeschreven @event)
-        {
-            rm.IsActief = false;
-
-            rm.Version = @event.Version;
-            rm.PapierSettingPersoonId = @event.AggregateId;
-        }
     }
 }

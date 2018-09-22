@@ -42,26 +42,24 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon
         private void Geregistreerd()
         {
             Command<ZetPapierAan>(c => Handle(c));
-            Command<ZetPapierUit>(c => Handle(c));
-            Command<SchrijfPapierSettingPersoonUit>(c => Handle(c));
+            Command<ZetPapierUit>(c => Handle(c));     
         }
 
         private void PapierAan()
         {
-            Command<ZetPapierUit>(c => Handle(c));
-            Command<SchrijfPapierSettingPersoonUit>(c => Handle(c));
+            Command<ZetPapierUit>(c => Handle(c));        
         }
 
         private void PapierUit()
         {
             Command<ZetPapierAan>(c => Handle(c));
-            Command<SchrijfPapierSettingPersoonUit>(c => Handle(c));
         }
 
         private void Uitgeschreven()
         {
             Command<RegistreerPapierSettingPersoon>(c => Handle(c));
         }
+
         private void Handle(RegistreerPapierSettingPersoon command)
         {
             RaiseEvent(new PapierSettingPersoonGeregistreerd(command.PerNummer, command.Naam, command.Voornaam, command.Straat, command.Nummer,
@@ -78,12 +76,6 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon
         private void Handle(ZetPapierUit command)
         {
             RaiseEvent(new PapierSettingPersoonPapierUitgezet(command.PerNummer),
-              e => Sender.Tell(CommandFeedback.CreateSuccessFeedback()));
-        }
-
-        private void Handle(SchrijfPapierSettingPersoonUit command)
-        {
-            RaiseEvent(new PapierSettingPersoonUitgeschreven(command.PerNummer),
               e => Sender.Tell(CommandFeedback.CreateSuccessFeedback()));
         }
     }
