@@ -109,8 +109,14 @@ namespace Euricom.Cruise2018.Demo.Client
 
         private static void KiesEenPerNummer()
         {
-            Console.WriteLine("Geef een persoonnummer in:");
-            _pernummer = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Geef een persoonnummer in:");
+                _pernummer = Console.ReadLine();
+            }
+            while (_pernummer == string.Empty);
+
+
         } 
 
         private static void ConfigureBus()

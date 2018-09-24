@@ -24,7 +24,7 @@ namespace Euricom.Cruise2018.Demo.Services.Core.ApplicationEventHandlers
             var projectionCoordinator = _actorSystem.GetActorFromAddressBook(ActorAddresses.ProjectionCoordinator);
 
             var projectFeedback = projectionCoordinator.Ask<ProjectionCoordinator.ProjectionsCompleted>(
-                new ProjectionCoordinator.Project(Guid.NewGuid(), @event), TimeSpan.FromSeconds(20)).Result;
+                new ProjectionCoordinator.Project(@event), TimeSpan.FromSeconds(20)).Result;
 
             if (!projectFeedback.Successfully)
             {

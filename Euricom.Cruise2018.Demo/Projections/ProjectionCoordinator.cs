@@ -23,12 +23,10 @@ namespace Euricom.Cruise2018.Demo.Projections
 
         public sealed class Project
         {
-            public Guid Id { get; private set; }
             public IApplicationEvent Event { get; private set; }
 
-            public Project(Guid id, IApplicationEvent @event)
+            public Project(IApplicationEvent @event)
             {
-                Id = id;
                 Event = @event;
             }
         }
@@ -108,12 +106,12 @@ namespace Euricom.Cruise2018.Demo.Projections
 
         private void WaitingForProjectionRequest()
         {
-            Receive<Project>(m => SendEventToProjectors(m.Id, m.Event));
+            Receive<Project>(m => SendEventToProjectors(m.Event));
         }
 
         private void WaitingForProjectorResponses()
         {
-            Receive<Project>(m => SendEventToProjectors(m.Id, m.Event));
+            Receive<Project>(m => SendEventToProjectors(m.Event));
 
             Receive<ProjectionSucceeded>(m => HandleProjectionSucceeded(m));
             Receive<ProjectionFailed>(m => HandleProjectionFailed(m));
@@ -137,12 +135,11 @@ namespace Euricom.Cruise2018.Demo.Projections
             _scheduler = Context.System.Scheduler.ScheduleTellOnceCancelable(TimeSpan.FromSeconds(5), Self, new StartProjecting(), Self);
         }
 
-        private void SendEventToProjectors(Guid correlationId, IApplicationEvent @event)
+        private void SendEventToProjectors(IApplicationEvent @event)
         {
             var eventType = @event.GetType();
 
-            _correlationId = correlationId;
-            _subscriptions[eventType].ForEach(p => p.Tell(new ProjectApplicationEvent(correlationId, @event)));
+            _subscriptions[eventType].ForEach(p => p.Tell(new ProjectApplicationEvent(@event)));
             _subscribersForEvent = new List<IActorRef>();
             _subscribersForEvent.AddRange(_subscriptions[eventType]);
             _projectRequestor = Sender;
@@ -153,12 +150,6 @@ namespace Euricom.Cruise2018.Demo.Projections
 
         private bool HandleProjectionSucceeded(ProjectionSucceeded m)
         {
-            if (m.CorrelationId != _correlationId)
-            {
-                Context.System.Log.Warning("ProjectionSucceeded message received with wrong CorrelationId!");
-                return false;
-            }
-
             _subscribersForEvent.Remove(Sender);
             if (AllProjectorsAnswered()) NotifyProjectionRequestor();
 
@@ -167,12 +158,6 @@ namespace Euricom.Cruise2018.Demo.Projections
 
         private bool HandleProjectionFailed(ProjectionFailed m)
         {
-            if (m.CorrelationId != _correlationId)
-            {
-                Context.System.Log.Warning("ProjectionFailed message received with wrong CorrelationId!");
-                return false;
-            }
-
             _projectionsOK = false;
             _subscribersForEvent.Remove(Sender);
             if (AllProjectorsAnswered()) NotifyProjectionRequestor();

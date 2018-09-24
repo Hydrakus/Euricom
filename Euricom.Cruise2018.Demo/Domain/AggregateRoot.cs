@@ -56,7 +56,7 @@ namespace Euricom.Cruise2018.Demo.Domain
 
         protected abstract TAggregateRootEntity InitializeState(string aggregateId);
 
-        protected void RaiseEvent(VersionedEvent @event, Action<VersionedEvent> onAfterPersistPublish = null)
+        protected void RaiseEvent(VersionedEvent @event)
         {
             @event.AggregateId = State.Id;
             @event.Version = State.Version + 1;
@@ -68,10 +68,7 @@ namespace Euricom.Cruise2018.Demo.Domain
 
                 _applicationEventPublisher.Tell(@event);
 
-                if (onAfterPersistPublish != null)
-                {
-                    onAfterPersistPublish(@event);
-                }
+                Sender.Tell(CommandFeedback.CreateSuccessFeedback());
             });
         }
 

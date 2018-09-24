@@ -63,20 +63,17 @@ namespace Euricom.Cruise2018.Demo.Domain.PapierSettingPersoon
         private void Handle(RegistreerPapierSettingPersoon command)
         {
             RaiseEvent(new PapierSettingPersoonGeregistreerd(command.PerNummer, command.Naam, command.Voornaam, command.Straat, command.Nummer,
-                command.Bus, command.Postcode, command.Gemeente),
-                e => Sender.Tell(CommandFeedback.CreateSuccessFeedback()));
+                command.Bus, command.Postcode, command.Gemeente));
         }
 
         private void Handle(ZetPapierAan command)
         {
-            RaiseEvent(new PapierSettingPersoonPapierAangezet(command.PerNummer),
-              e => Sender.Tell(CommandFeedback.CreateSuccessFeedback()));
+            RaiseEvent(new PapierSettingPersoonPapierAangezet(command.PerNummer));
         }
 
         private void Handle(ZetPapierUit command)
         {
-            RaiseEvent(new PapierSettingPersoonPapierUitgezet(command.PerNummer),
-              e => Sender.Tell(CommandFeedback.CreateSuccessFeedback()));
+            RaiseEvent(new PapierSettingPersoonPapierUitgezet(command.PerNummer));
         }
     }
 }

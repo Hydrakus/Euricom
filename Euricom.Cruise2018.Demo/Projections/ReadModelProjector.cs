@@ -54,14 +54,14 @@ namespace Euricom.Cruise2018.Demo.Projections
             {
                 _projectMethods[message.Event.GetType()].Invoke(this, new object[] { (object)message.Event });
 
-                Sender.Tell(new ProjectionSucceeded(message.CorrelationId));
+                Sender.Tell(new ProjectionSucceeded());
             }
             catch (Exception ex)
             {
                 Context.System.Log.Error(ex, "An exception occured while projecting an application event of type '{0}' for aggregate id '{1}'!",
                     message.Event.GetType().ToString(), message.Event.AggregateId);
 
-                Sender.Tell(new ProjectionFailed(message.CorrelationId));
+                Sender.Tell(new ProjectionFailed());
             }
         }
 
